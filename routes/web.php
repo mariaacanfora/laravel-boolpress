@@ -14,9 +14,9 @@ use Illuminate\Support\Facades\Auth;
 |
 */
 
-Route::get('/', function () {
+/* Route::get('/', function () {
     return view('welcome');
-});
+}); */
 
 Auth::routes();
 
@@ -28,4 +28,8 @@ Route::namespace('Admin')
     ->group(function (){
         Route::get('/', 'HomeController@index')->name('index');
         Route::resource('posts', 'PostController');
-    });
+});
+
+Route::get('{any?}', function (){
+    return view('guest.index');
+})->where('any', '.*')->name('index');

@@ -6,8 +6,12 @@
                 <a href="{{route('admin.posts.index')}}" class="text-light">I tuoi post</a>
             </li>
 
-            <li>
+            <li class="py-3">
                 <a href="{{route('admin.posts.create')}}" class="text-light">Crea un nuovo post</a>
+            </li>
+            
+            <li class="py-3">
+                <a href="{{route('index')}}" class="text-light">Area pubblica</a>
             </li>
         </ul>
     </div>

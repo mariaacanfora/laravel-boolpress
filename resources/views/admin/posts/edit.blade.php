@@ -19,7 +19,7 @@
                     
                     <div class="mb-3">
                         <label for="field_text" class="form-label">Contenuto</label>
-                        <input type="text" class="form-control" name="text" id="field_text">
+                        <textarea type="text" class="form-control" name="text" id="field_text"></textarea>
                     </div>
         
                     

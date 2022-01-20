@@ -39,9 +39,9 @@ class PostController extends Controller
     {
         $data = $request->all();
 
-        $novel = new Post();
-        $novel->fill($data);
-        $novel->save();
+        $post = new Post();
+        $post->fill($data);
+        $post->save();
         
         return redirect()->route("admin.posts.show");
     }
