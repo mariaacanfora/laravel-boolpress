@@ -26,12 +26,13 @@
                         <label for="field_text" class="form-label">Categoria</label>
                         <select name="category" id="category" class="form-control">
                             @foreach($categories as $category)
-                                <option value="{{$category->id}}">{{$category->name}}</option>
+                                <option value="{{$category->id}}" @if($category->id ===
+                                    $post->category_id) selected @endif>{{$category->name}}</option>
                             @endforeach
                         </select>
                     </div>
         
-                    <button class="btn btn-primary" type="submit">Aggiungi</button>
+                    <button class="btn btn-primary" type="submit">Salva</button>
                 </div>
             </form>
             <script src="//js.nicedit.com/nicEdit-latest.js" type="text/javascript"></script>

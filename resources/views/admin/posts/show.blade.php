@@ -6,7 +6,9 @@
         {{-- @if($post->imgPath)
             <img src="{{$post->imgPath}}" alt="posts image">
         @endif --}}
-        <p>{{$post->text}}</p>
+        <p>{!!$post->text!!}</p>
+
+        <span>Categoria: {{$post->category->name}}</span>
 
         <div class="mt-5">
             <a class="btn btn-success" href="{{route('admin.posts.index', $post->id)}}">Torna alla home</a>
