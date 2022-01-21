@@ -12,8 +12,9 @@
                     </div>
         
                     <div class="mb-3">
-                        <label for="field_image" class="form-label">Immagine</label>
-                        <input type="url" class="form-control" name="image" id="field_image">
+                        <label for="field_imgPath" class="form-label">Immagine</label>
+                        <input type="text" class="form-control @error('imgPath') is-invalid @enderror" name="imgPath"
+                        value="{{ old("imgPath") }}" name="imgPath" id="field_imgPath" >
                     </div>
                     
                     <div class="mb-3">
@@ -22,15 +23,28 @@
                     </div>
         
                     <div class="mb-3">
-                        <label for="field_text" class="form-label">Categoria</label>
+                        <label class="form-label">Categoria</label>
                         <select name="category" id="category" class="form-control">
                             @foreach($categories as $category)
                                 <option value="{{$category->id}}">{{$category->name}}</option>
                             @endforeach
                         </select>
                     </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Tag</label>
+                        <select name="tag[]" id="tag_field" class="form-control" multiple>
+                            @foreach($tagsList as $tag)
+                                <option value="{{$tag->id}}">{{$tag->name}}</option>
+                            @endforeach
+                        </select>
+                    </div>
+
+
         
-                    <button class="btn btn-primary" type="submit">Aggiungi</button>
+                    <div class="text-center">
+                        <button class="btn btn-primary" type="submit">Aggiungi</button>
+                    </div>
                 </div>
             </form>
             <script src="//js.nicedit.com/nicEdit-latest.js" type="text/javascript"></script>

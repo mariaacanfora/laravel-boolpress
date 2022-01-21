@@ -13,25 +13,35 @@
                     </div>
         
                     <div class="mb-3">
-                        <label for="field_image" class="form-label">Immagine</label>
-                        <input type="url" class="form-control" name="image" id="field_image" value="{{ old('image') ?? $post->image }}">
+                        <label for="field_imgPath" class="form-label">Immagine</label>
+                        <input type="text" class="form-control" name="imgPath"
+                        value="{{ old("imgPath") ?? $post->imgPath }}" id="field_imgPath" >
                     </div>
                     
                     <div class="mb-3">
                         <label for="field_text" class="form-label">Contenuto</label>
-                        <textarea type="text" class="form-control" name="text" id="field_text" value="{{ old('text') ?? $post->text }}"></textarea>
+                        <textarea type="text" class="form-control  @error('text') is-invalid @enderror" name="text" id="field_text">{!!$post->text!!}</textarea>
                     </div>
         
                     <div class="mb-3">
                         <label for="field_text" class="form-label">Categoria</label>
-                        <select name="category" id="category" class="form-control">
+                        <select name="category_id" id="category" class="form-control">
                             @foreach($categories as $category)
                                 <option value="{{$category->id}}" @if($category->id ===
                                     $post->category_id) selected @endif>{{$category->name}}</option>
+                                    @dump($category->id)
                             @endforeach
                         </select>
                     </div>
-        
+    
+                    <div class="mb-3">
+                        <label class="form-label">Tag</label>
+                        <select name="tag[]" id="tag_field" class="form-control" multiple>
+                            @foreach($tagsList as $tag)
+                                <option value="{{$tag->id}}" @if ($post->tags->contains($tag)) selected @endif>{{$tag->name}}</option>
+                            @endforeach
+                        </select>
+                    </div>                    
                     <button class="btn btn-primary" type="submit">Salva</button>
                 </div>
             </form>
@@ -39,3 +49,4 @@
             <script type="text/javascript">bkLib.onDomLoaded(nicEditors.allTextAreas);</script>
         </div>
 @endsection
+

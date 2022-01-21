@@ -75,7 +75,7 @@
             <div class="container-fluid" style="height: 100%">
                 <div class="row" style="height: 100%">
                     @include('admin.partials.sidebar')
-                    <div class="col-10 d-inline-block text-center">
+                    <div class="col-10 d-inline-block">
                         @yield('content')
                     </div>
                 </div>

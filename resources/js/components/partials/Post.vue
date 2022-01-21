@@ -4,8 +4,11 @@
             <h5 class="card-title">{{post.title}}</h5>
             <p class="card-text">{{post.text}}</p>
             <span class="bg-secondary rounded-pill p-1 text-light">Categoria: {{post.category.name}}</span>
-            <!-- <p>{{post.created_at}}</p> -->
-            <!-- <a href="'/posts/' + post.id" class="btn btn-primary">Go somewhere</a> -->
+            <!-- <div>
+                <h5 class="d-inline-block text-light" v-for="(tag, i) in post.tags" :key="i">
+                    <span class="badge bg-primary">{{$tag.name}}</span>
+                </h5>
+            </div>    -->         
         </div>
     </div>
 </template>
@@ -19,6 +22,7 @@ export default {
             required: true
         }
     }
+
 }
 </script>
 

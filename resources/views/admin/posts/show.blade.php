@@ -3,9 +3,16 @@
 @section('content')
     <div class="pt-5">
         <h1>{{$post->title}}</h1>
-        {{-- @if($post->imgPath)
-            <img src="{{$post->imgPath}}" alt="posts image">
-        @endif --}}
+        <div>
+            @foreach($post->tags as $tag)
+                <h5 class="d-inline-block text-light">
+                    <span class="badge bg-primary">{{$tag->name}}</span>
+                </h5>
+            @endforeach
+        </div>
+        @if($post->imgPath)
+            <img src="{{$post->imgPath}}" class="w-25" alt="posts image">
+        @endif
         <p>{!!$post->text!!}</p>
 
         <span>Categoria: {{$post->category->name}}</span>

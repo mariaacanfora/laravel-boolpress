@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Category;
 use App\Http\Controllers\Controller;
 use App\Post;
+use App\Tag;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -29,7 +30,8 @@ class PostController extends Controller
     public function create()
     {
         $categories = Category::all();
-        return view('admin.posts.create', compact('categories'));
+        $tagsList = Tag::all();
+        return view('admin.posts.create', ['categories' => $categories, 'tagsList' => $tagsList]);
     }
 
     /**
@@ -46,8 +48,10 @@ class PostController extends Controller
         $post->fill($data);
         $post->user_id = Auth::user()->id;
         $post->category_id = $data['category'];
+    
         $post->save();
         
+        $post->tags()->sync($data['tag']);
         return redirect()->route("admin.posts.show", compact('post'));
     }
 
@@ -71,9 +75,12 @@ class PostController extends Controller
     public function edit(Post $post)
     {
         $categories = Category::all();
+        $tagsList = Tag::all();
+
         return view('admin.posts.edit', [
             'post' => $post,
-            'categories' => $categories
+            'categories' => $categories,
+            'tagsList' => $tagsList
         ]);
     }
 
@@ -89,6 +96,7 @@ class PostController extends Controller
         $postData = $request->all();
 
         $post->update($postData);
+        $post->tags()->sync($postData['tag']);
 
         return redirect()->route('admin.posts.show', $post->id);
     }
@@ -101,7 +109,9 @@ class PostController extends Controller
      */
     public function destroy(Post $post)
     {
+        $post->tags()->detach();
         $post->delete();
+
         return redirect()->route('admin.posts.index');
     }
 }
