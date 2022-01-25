@@ -8,9 +8,30 @@ use App\Post;
 use App\Tag;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Str;
 
 class PostController extends Controller
 {
+    private function createSlug($title) {
+        $slug = Str::slug($title);
+    
+        $alreadyExists = Post::where("slug", $slug)->first();
+        $counter = 1;
+    
+        while ($alreadyExists) {
+          $newSlug = $slug . "-" . $counter;
+          $alreadyExists = Post::where("slug", $newSlug)->first();
+          $counter++;
+    
+          if (!$alreadyExists) {
+            $slug = $newSlug;
+          }
+        }
+    
+        return $slug;
+    }
+
+
     /**
      * Display a listing of the resource.
      *
@@ -47,12 +68,13 @@ class PostController extends Controller
         $post = new Post();
         $post->fill($data);
         $post->user_id = Auth::user()->id;
+        $post->slug = $this->createSlug($data["title"]);
         $post->category_id = $data['category'];
     
         $post->save();
         
         $post->tags()->sync($data['tag']);
-        return redirect()->route("admin.posts.show", compact('post'));
+        return redirect()->route("admin.posts.show", $post->slug);
     }
 
     /**
@@ -61,8 +83,9 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Post $post)
+    public function show($slug)
     {
+        $post = Post::where('slug', $slug)->first();
         return view('admin.posts.show', compact('post'));
     }
 
@@ -72,8 +95,9 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Post $post)
+    public function edit($slug)
     {
+        $post = Post::where('slug', $slug)->first();
         $categories = Category::all();
         $tagsList = Tag::all();
 
@@ -91,14 +115,23 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Post $post)
+    public function update(Request $request, $slug)
     {
+        $post = Post::where('slug', $slug)->first();
         $postData = $request->all();
-
-        $post->update($postData);
+        $oldTitle = $post->title;
+        $titleChanged = $oldTitle !== $postData["title"];
+    
+        $post->fill($postData);
+    
+        if ($titleChanged) {
+          $post->slug = $this->createSlug($postData["title"]);
+        }
+    
+        $post->save();
         $post->tags()->sync($postData['tag']);
 
-        return redirect()->route('admin.posts.show', $post->id);
+        return redirect()->route('admin.posts.show', $post->slug);
     }
 
     /**
@@ -107,11 +140,14 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Post $post)
+    public function destroy($slug)
     {
+        $post = Post::where('slug', $slug)->first();
         $post->tags()->detach();
         $post->delete();
 
-        return redirect()->route('admin.posts.index');
+        return redirect()->route('admin.posts.index')->with([
+            'status' => 'Post cancellato!'
+        ]);
     }
 }

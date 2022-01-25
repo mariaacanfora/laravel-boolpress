@@ -2,7 +2,7 @@
 
 @section('content')
         <div class="text-start">
-            <form action="{{ route('admin.posts.update', $post->id) }}" method="post">
+            <form action="{{ route('admin.posts.update', $post->slug) }}" method="post">
                 @csrf
                 @method('put')
     

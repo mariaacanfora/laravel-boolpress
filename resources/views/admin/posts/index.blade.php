@@ -10,7 +10,7 @@
                     <h5 class="card-title">{{$post->title}}</h5>
                     <p class="card-text">{!!$post->text!!}</p>
                     <p>Categoria: {{$post->category->name}}</p>
-                    <a href="{{route('admin.posts.show', $post->id)}}" class="btn-link">Visualizza post</a>
+                    <a href="{{route('admin.posts.show', $post->slug)}}" class="btn-link">Visualizza post</a>
                     
                 </div>
             </div>
