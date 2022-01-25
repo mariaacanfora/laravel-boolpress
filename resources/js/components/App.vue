@@ -1,6 +1,8 @@
 <template>
   <div>
-      <header>
+
+      <h1>prova</h1>
+      <!-- <header>
           <div class="hero-container">
               <h1 class="text-light hero-text">Boolpress</h1>
           </div>
@@ -14,18 +16,19 @@
 
                 <div class="mt-5" v-else>
                     <Post
-                        v-for="post in postList"
-                        :key="post.id"
+                        v-for="(post, i) in postList"
+                        :key="i"
                         :post="post"
                     ></Post>
                 </div>
           </div>
-      </main>
+      </main> -->
   </div>
 </template>
 
 <script>
 import Post from "./partials/Post.vue";
+import axios from "axios/dist/axios";
 
 export default {
     name: 'App',
@@ -35,10 +38,19 @@ export default {
             postList: []
         }
     },
+    methods: {
+        getData() {
+
+           axios.get("/api/posts").then((resp) => {
+                console.log(resp);
+                /* this.postList = resp.data.data; */
+                /* this.currentPage = resp.data.current_page;
+                this.lastPage = resp.data.last_page; */
+            });
+        },
+    },
     mounted(){
-         window.axios.get("/api/posts").then((resp) => {
-            this.postList = resp.data;
-        });
+        this.getData();
     }
 }
 </script>
