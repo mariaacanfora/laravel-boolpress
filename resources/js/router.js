@@ -3,7 +3,8 @@ import VueRouter from 'vue-router'
 import Home from './pages/Home.vue'
 import Contacts from './pages/Contacts.vue'
 import About from './pages/About.vue'
-import Show from './pages/Posts/Show.vue'
+import PostShow from './pages/Posts/Show.vue'
+import CategoryShow from './pages/categories/Show.vue'
 
 Vue.use(VueRouter)
 
@@ -31,7 +32,13 @@ const router = new VueRouter({
         {
             path:'/posts/:slug',
             name: 'posts.show',
-            component: Show
+            component: PostShow
+        },
+
+        {
+            path:'/category/:category',
+            name: 'category.show',
+            component: CategoryShow
         }
     ]
 })

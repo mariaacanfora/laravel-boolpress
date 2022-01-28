@@ -2,6 +2,7 @@
   <div>
       <header>
           <Navbar></Navbar>
+          <!-- <Header :title="post.title" :imgPath="post.imgPath"></Header> -->
           <Header :title="post.title" :imgPath="post.imgPath"></Header>
       </header>
 
@@ -21,9 +22,10 @@
 
 <script>
 import Header from '../../components/Header.vue'
+
 import Navbar from '../../components/Navbar.vue'
 export default {
-    components: { Navbar, Header },
+    components: { Navbar, Header},
     data(){
         return {
             post: {

@@ -1,7 +1,7 @@
 <template>
   <div>
-        <div class="hero-container" :style="{backgroundImage: 'url(' + imgPath + ')'}"><!-- :style="{backgroundImage: 'url(' + bgMap[$route.path] + ')'}" -->
-            <h1 class="text-light hero-text">{{title}}</h1>
+        <div class="hero-home-container" :style="{backgroundImage: 'url(' + imgPath + ')'}"><!-- :style="{backgroundImage: 'url(' + bgMap[$route.path] + ')'}" -->
+            <h1 class="text-light hero-home-text">{{title}}</h1>
         </div>
   </div>
 </template>
@@ -29,5 +29,22 @@ export default {
 </script>
 
 <style lang="scss">
+header {
+  .hero-home-container {
+    //background-image: url("https://images.unsplash.com/photo-1553095066-5014bc7b7f2d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8d2FsbCUyMGJhY2tncm91bmR8ZW58MHx8MHx8&w=1000&q=80");
+    background-size: cover;
+    padding-top: 500px;
+    background-position: top;
+    position: relative;
 
+    .hero-home-text {
+      text-shadow: 0 0 3px #000000;
+      font-size: 100px;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, 50%);
+    }
+  }
+}
 </style>
