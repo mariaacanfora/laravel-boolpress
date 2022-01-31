@@ -8,6 +8,7 @@ use App\Post;
 use App\Tag;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
 class PostController extends Controller
@@ -70,7 +71,9 @@ class PostController extends Controller
         $post->user_id = Auth::user()->id;
         $post->slug = $this->createSlug($data["title"]);
         $post->category_id = $data['category'];
-    
+
+        $post->imgPath = Storage::put('posts', $data['imgPath']);
+        //dd($post->imgPath);
         $post->save();
         
         $post->tags()->sync($data['tag']);

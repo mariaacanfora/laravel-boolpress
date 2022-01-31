@@ -2,7 +2,7 @@
     <div>
         <header>
             <Navbar></Navbar>
-            <Header title="" imgPath="https://www.laverapergamena.com/wp-content/uploads/2020/11/Depositphotos_1200x630.jpg"></Header>
+            <Header :title="posts[0].category.name" imgPath="https://www.laverapergamena.com/wp-content/uploads/2020/11/Depositphotos_1200x630.jpg"></Header>
             
         </header>
 

@@ -1984,10 +1984,6 @@ var render = function () {
               _vm._v(_vm._s(_vm.post.title)),
             ]),
             _vm._v(" "),
-            _c("p", { staticClass: "card-text" }, [
-              _vm._v(_vm._s(_vm.post.text)),
-            ]),
-            _vm._v(" "),
             _c(
               "span",
               { staticClass: "bg-secondary rounded-pill p-1 text-light" },
@@ -2181,7 +2177,8 @@ var render = function () {
                             _c(
                               "router-link",
                               {
-                                staticClass: "text-decoration-none text-dark",
+                                staticClass:
+                                  "text-decoration-none text-dark d-inline-block w-100",
                                 attrs: {
                                   to: {
                                     name: "category.show",
@@ -2369,7 +2366,7 @@ var render = function () {
         _vm._v(" "),
         _c("Header", {
           attrs: {
-            title: "",
+            title: _vm.posts[0].category.name,
             imgPath:
               "https://www.laverapergamena.com/wp-content/uploads/2020/11/Depositphotos_1200x630.jpg",
           },

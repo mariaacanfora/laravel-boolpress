@@ -5,7 +5,7 @@
                 <div class="row row-cols-2">
                     <div class="col">
                         <h5 class="card-title">{{post.title}}</h5>
-                        <p class="card-text">{{post.text}}</p>
+                        <!-- <p class="card-text">{{post.text}}</p> -->
                         <span class="bg-secondary rounded-pill p-1 text-light">Categoria: {{post.category.name}}</span>
                         <img :src="post.imgPath" alt="post's image" class="d-block mt-2" style="max-height: 130px">
                         <!-- <div>

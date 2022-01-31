@@ -2,7 +2,7 @@
 
 @section('content')
         <div class="text-start">
-            <form action="{{ route('admin.posts.store')}}" method="post">
+            <form action="{{ route('admin.posts.store')}}" method="post" enctype='multipart/form-data'>
                 @csrf
     
                 <div class="text-start mt-5">
@@ -13,7 +13,7 @@
         
                     <div class="mb-3">
                         <label for="field_imgPath" class="form-label">Immagine</label>
-                        <input type="text" class="form-control @error('imgPath') is-invalid @enderror" name="imgPath"
+                        <input type="file" class="form-control @error('imgPath') is-invalid @enderror" name="imgPath"
                         value="{{ old("imgPath") }}" name="imgPath" id="field_imgPath" >
                     </div>
                     

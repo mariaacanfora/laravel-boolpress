@@ -18,7 +18,7 @@
                                 <h6>Categorie</h6>
                             </li>
                             <li class="list-group-item list-group-item-action" :class="'list-group-item-' + colorCategoriesMap[category.id]" v-for="category in categories" :key="category.id">
-                               <router-link :to="{ name: 'category.show', params: { category: category.id }}" class="text-decoration-none text-dark"> {{category.name}}</router-link>
+                               <router-link :to="{ name: 'category.show', params: { category: category.id }}" class="text-decoration-none text-dark d-inline-block w-100"> {{category.name}}</router-link>
                             </li>
                         </ul>
                     </div>

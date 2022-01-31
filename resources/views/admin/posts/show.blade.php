@@ -12,7 +12,7 @@
             @endforeach
         </div>
         @if($post->imgPath)
-            <img src="{{$post->imgPath}}" class="w-25" alt="posts image">
+            <img src="{{asset('storage/' . $post->imgPath)}}" class="w-25" alt="posts image">
         @endif
         <p>{!!$post->text!!}</p>
 
