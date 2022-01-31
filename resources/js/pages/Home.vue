@@ -5,7 +5,7 @@
         <OnlyForHome title="Boolpress" imgPath="https://images.unsplash.com/photo-1553095066-5014bc7b7f2d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8d2FsbCUyMGJhY2tncm91bmR8ZW58MHx8MHx8&w=1000&q=80"></OnlyForHome>
     </header>
     <main>
-        <div class="container-fluid">
+        <div class="container-fluid" v-if="!loading">
             <h2 class="mb-5 text-center" v-if="postList.length === 0">
                 Ancora nessun dato disponibile...
             </h2>
@@ -45,6 +45,13 @@
                 </div>
             </div>
         </div>
+
+        <div v-else class="container text-center">
+            <div class="progress">
+                <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" style="width: 100%"> 
+                </div>
+            </div>
+        </div>
     </main>
       
   </div>
@@ -71,17 +78,21 @@ export default {
                 3: 'secondary', 
                 4: 'warning', 
                 5: 'info'
-            }
+            }, 
+
+            loading: true
         };
     },
 
     methods: {
         getData(page = 1) {
             window.axios.get("/api/posts?page=" + page).then((resp) => {
+                this.loading = true;
                 //console.log(resp.data);
                 this.postList = resp.data.data;
                 this.currentPage = resp.data.current_page;
                 this.lastPage = resp.data.last_page;
+                this.loading = false;
             });
         },
 

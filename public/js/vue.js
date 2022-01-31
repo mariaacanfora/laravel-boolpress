@@ -466,6 +466,13 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -489,7 +496,8 @@ __webpack_require__.r(__webpack_exports__);
         3: 'secondary',
         4: 'warning',
         5: 'info'
-      }
+      },
+      loading: true
     };
   },
   methods: {
@@ -498,10 +506,12 @@ __webpack_require__.r(__webpack_exports__);
 
       var page = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1;
       window.axios.get("/api/posts?page=" + page).then(function (resp) {
-        //console.log(resp.data);
+        _this.loading = true; //console.log(resp.data);
+
         _this.postList = resp.data.data;
         _this.currentPage = resp.data.current_page;
         _this.lastPage = resp.data.last_page;
+        _this.loading = false;
       });
     },
     getCategories: function getCategories() {
@@ -2326,138 +2336,140 @@ var render = function () {
     ),
     _vm._v(" "),
     _c("main", [
-      _c("div", { staticClass: "container-fluid" }, [
-        _vm.postList.length === 0
-          ? _c("h2", { staticClass: "mb-5 text-center" }, [
-              _vm._v(
-                "\n              Ancora nessun dato disponibile...\n          "
-              ),
-            ])
-          : _c("div", { staticClass: "mt-5 mx-5" }, [
-              _c("div", { staticClass: "row" }, [
-                _c("div", { staticClass: "col-3" }, [
-                  _c(
-                    "ul",
-                    { staticClass: "list-group" },
-                    [
-                      _vm._m(0),
-                      _vm._v(" "),
-                      _vm._l(_vm.categories, function (category) {
-                        return _c(
-                          "li",
-                          {
-                            key: category.id,
-                            staticClass:
-                              "list-group-item list-group-item-action",
-                            class:
-                              "list-group-item-" +
-                              _vm.colorCategoriesMap[category.id],
-                          },
-                          [
-                            _c(
-                              "router-link",
-                              {
-                                staticClass:
-                                  "text-decoration-none text-dark d-inline-block w-100",
-                                attrs: {
-                                  to: {
-                                    name: "category.show",
-                                    params: { category: category.id },
-                                  },
-                                },
-                              },
-                              [_vm._v(" " + _vm._s(category.name))]
-                            ),
-                          ],
-                          1
-                        )
-                      }),
-                    ],
-                    2
+      !_vm.loading
+        ? _c("div", { staticClass: "container-fluid" }, [
+            _vm.postList.length === 0
+              ? _c("h2", { staticClass: "mb-5 text-center" }, [
+                  _vm._v(
+                    "\n              Ancora nessun dato disponibile...\n          "
                   ),
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "col-9" }, [
-                  _c(
-                    "div",
-                    { staticClass: "row row-cols-2" },
-                    _vm._l(_vm.postList, function (post, i) {
-                      return _c("Post", { key: i, attrs: { post: post } })
-                    }),
-                    1
-                  ),
-                ]),
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "d-flex justify-content-center" }, [
-                _c(
-                  "ul",
-                  { staticClass: "pagination" },
-                  [
-                    _c("li", [
+                ])
+              : _c("div", { staticClass: "mt-5 mx-5" }, [
+                  _c("div", { staticClass: "row" }, [
+                    _c("div", { staticClass: "col-3" }, [
                       _c(
-                        "button",
-                        {
-                          staticClass: "page-link",
-                          on: {
-                            click: function ($event) {
-                              _vm.currentPage != 0 && _vm.currentPage > 0
-                                ? _vm.getData(_vm.currentPage - 1)
-                                : _vm.getData(_vm.currentPage)
-                            },
-                          },
-                        },
-                        [_vm._v("Indietro")]
+                        "ul",
+                        { staticClass: "list-group" },
+                        [
+                          _vm._m(0),
+                          _vm._v(" "),
+                          _vm._l(_vm.categories, function (category) {
+                            return _c(
+                              "li",
+                              {
+                                key: category.id,
+                                staticClass:
+                                  "list-group-item list-group-item-action",
+                                class:
+                                  "list-group-item-" +
+                                  _vm.colorCategoriesMap[category.id],
+                              },
+                              [
+                                _c(
+                                  "router-link",
+                                  {
+                                    staticClass:
+                                      "text-decoration-none text-dark d-inline-block w-100",
+                                    attrs: {
+                                      to: {
+                                        name: "category.show",
+                                        params: { category: category.id },
+                                      },
+                                    },
+                                  },
+                                  [_vm._v(" " + _vm._s(category.name))]
+                                ),
+                              ],
+                              1
+                            )
+                          }),
+                        ],
+                        2
                       ),
                     ]),
                     _vm._v(" "),
-                    _vm._l(_vm.lastPage, function (page) {
-                      return _c(
-                        "li",
-                        {
-                          key: page,
-                          staticClass: "page-item",
-                          class: { active: _vm.currentPage === page },
-                        },
-                        [
+                    _c("div", { staticClass: "col-9" }, [
+                      _c(
+                        "div",
+                        { staticClass: "row row-cols-2" },
+                        _vm._l(_vm.postList, function (post, i) {
+                          return _c("Post", { key: i, attrs: { post: post } })
+                        }),
+                        1
+                      ),
+                    ]),
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "d-flex justify-content-center" }, [
+                    _c(
+                      "ul",
+                      { staticClass: "pagination" },
+                      [
+                        _c("li", [
                           _c(
                             "button",
                             {
                               staticClass: "page-link",
                               on: {
                                 click: function ($event) {
-                                  return _vm.getData(page)
+                                  _vm.currentPage != 0 && _vm.currentPage > 0
+                                    ? _vm.getData(_vm.currentPage - 1)
+                                    : _vm.getData(_vm.currentPage)
                                 },
                               },
                             },
-                            [_vm._v(_vm._s(page))]
+                            [_vm._v("Indietro")]
                           ),
-                        ]
-                      )
-                    }),
-                    _vm._v(" "),
-                    _c("li", [
-                      _c(
-                        "button",
-                        {
-                          staticClass: "page-link",
-                          on: {
-                            click: function ($event) {
-                              _vm.currentPage < _vm.lastPage
-                                ? _vm.getData(_vm.currentPage + 1)
-                                : _vm.getData(_vm.currentPage)
+                        ]),
+                        _vm._v(" "),
+                        _vm._l(_vm.lastPage, function (page) {
+                          return _c(
+                            "li",
+                            {
+                              key: page,
+                              staticClass: "page-item",
+                              class: { active: _vm.currentPage === page },
                             },
-                          },
-                        },
-                        [_vm._v("Avanti")]
-                      ),
-                    ]),
-                  ],
-                  2
-                ),
-              ]),
-            ]),
-      ]),
+                            [
+                              _c(
+                                "button",
+                                {
+                                  staticClass: "page-link",
+                                  on: {
+                                    click: function ($event) {
+                                      return _vm.getData(page)
+                                    },
+                                  },
+                                },
+                                [_vm._v(_vm._s(page))]
+                              ),
+                            ]
+                          )
+                        }),
+                        _vm._v(" "),
+                        _c("li", [
+                          _c(
+                            "button",
+                            {
+                              staticClass: "page-link",
+                              on: {
+                                click: function ($event) {
+                                  _vm.currentPage < _vm.lastPage
+                                    ? _vm.getData(_vm.currentPage + 1)
+                                    : _vm.getData(_vm.currentPage)
+                                },
+                              },
+                            },
+                            [_vm._v("Avanti")]
+                          ),
+                        ]),
+                      ],
+                      2
+                    ),
+                  ]),
+                ]),
+          ])
+        : _c("div", { staticClass: "container text-center" }, [_vm._m(1)]),
     ]),
   ])
 }
@@ -2468,6 +2480,18 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("li", { staticClass: "list-group-item text-center" }, [
       _c("h6", [_vm._v("Categorie")]),
+    ])
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "progress" }, [
+      _c("div", {
+        staticClass: "progress-bar progress-bar-striped progress-bar-animated",
+        staticStyle: { width: "100%" },
+        attrs: { role: "progressbar" },
+      }),
     ])
   },
 ]
