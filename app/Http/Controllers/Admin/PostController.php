@@ -124,8 +124,21 @@ class PostController extends Controller
         $postData = $request->all();
         $oldTitle = $post->title;
         $titleChanged = $oldTitle !== $postData["title"];
-    
+        $oldImgPath = $post->imgPath;
+
+        dd($postData);
+
+        //dd($request);
         $post->fill($postData);
+        //dd($postData);
+        
+        if ($request->file('imgPath')) {
+            if($oldImgPath){
+              Storage::delete($oldImgPath);
+            };
+            $post->imgPath = Storage::put('posts', $postData['imgPath']);
+          }
+      
     
         if ($titleChanged) {
           $post->slug = $this->createSlug($postData["title"]);

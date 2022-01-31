@@ -2,10 +2,10 @@
 
 @section('content')
         <div class="text-start">
-            <form action="{{ route('admin.posts.update', $post->slug) }}" method="post">
+            <form action="{{ route('admin.posts.update', $post->slug) }}" method="post" enctype='multipart/form-data'>
                 @csrf
                 @method('put')
-    
+                
                 <div class="text-start mt-5">
                     <div class="mb-3">
                         <label for="field_title" class="form-label">Titolo del post</label>
@@ -14,7 +14,7 @@
         
                     <div class="mb-3">
                         <label for="field_imgPath" class="form-label">Immagine</label>
-                        <input type="text" class="form-control" name="imgPath"
+                        <input type="file" class="form-control" name="imgPath"
                         value="{{ old("imgPath") ?? $post->imgPath }}" id="field_imgPath" >
                     </div>
                     
