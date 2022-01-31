@@ -3,7 +3,7 @@
       <header>
           <Navbar></Navbar>
           <!-- <Header :title="post.title" :imgPath="post.imgPath"></Header> -->
-          <Header :title="post.title" :imgPath="post.imgPath"></Header>
+          <Header :title="post.title" :imgPath="post.imgPath.startsWith('http') ? post.imgPath : '/storage/' + post.imgPath"></Header>
       </header>
 
       <main>

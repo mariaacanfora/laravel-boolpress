@@ -1993,7 +1993,12 @@ var render = function () {
             _c("img", {
               staticClass: "d-block mt-2",
               staticStyle: { "max-height": "130px" },
-              attrs: { src: _vm.post.imgPath, alt: "post's image" },
+              attrs: {
+                src: _vm.post.imgPath.startsWith("http")
+                  ? _vm.post.imgPath
+                  : "/storage/" + _vm.post.imgPath,
+                alt: "post's image",
+              },
             }),
           ]),
           _vm._v(" "),
@@ -2319,7 +2324,12 @@ var render = function () {
         _c("Navbar"),
         _vm._v(" "),
         _c("Header", {
-          attrs: { title: _vm.post.title, imgPath: _vm.post.imgPath },
+          attrs: {
+            title: _vm.post.title,
+            imgPath: _vm.post.imgPath.startsWith("http")
+              ? _vm.post.imgPath
+              : "/storage/" + _vm.post.imgPath,
+          },
         }),
       ],
       1
