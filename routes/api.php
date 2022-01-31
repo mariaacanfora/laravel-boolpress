@@ -24,3 +24,5 @@ Route::get("/posts/{slug}", "Api\PostController@show");
 
 Route::get("/category", "Api\CategoryController@index");
 Route::get("/category/{category}", "Api\CategoryController@show");
+
+Route::post('/contacts', 'Api\ContactController@store');
